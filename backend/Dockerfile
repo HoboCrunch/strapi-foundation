@@ -1,30 +1,37 @@
 # Production Dockerfile for Strapi on Railway
-FROM node:20-alpine as builder
+FROM node:20-slim as builder
 
 WORKDIR /app
 
 # Install build dependencies
-RUN apk add --no-cache python3 make g++
+RUN apt-get update && apt-get install -y \
+    python3 \
+    make \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy package files
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci
+RUN npm install
 
 # Copy source
 COPY . .
 
 # Build admin panel
+ENV NODE_ENV=production
 RUN npm run build
 
 # Production stage
-FROM node:20-alpine as production
+FROM node:20-slim as production
 
 WORKDIR /app
 
-# Install production dependencies only
-RUN apk add --no-cache vips-dev
+# Install runtime dependencies for sharp
+RUN apt-get update && apt-get install -y \
+    libvips-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy from builder
 COPY --from=builder /app/node_modules ./node_modules
@@ -34,7 +41,6 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/config ./config
 COPY --from=builder /app/src ./src
 COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/tsconfig.json ./
 
 # Set environment
 ENV NODE_ENV=production
