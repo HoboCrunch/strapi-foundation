@@ -1,0 +1,40 @@
+{
+  "name": "opsprocket-strapi",
+  "private": true,
+  "version": "0.1.0",
+  "description": "OpSprocket Strapi CMS Backend",
+  "license": "MIT",
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi",
+    "deploy": "strapi deploy"
+  },
+  "dependencies": {
+    "@strapi/plugin-cloud": "^5.31.3",
+    "@strapi/plugin-users-permissions": "^5.31.3",
+    "@strapi/strapi": "^5.31.3",
+    "better-sqlite3": "^11.7.0",
+    "pg": "^8.13.1",
+    "pg-connection-string": "^2.7.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.30.2",
+    "styled-components": "^6.1.19"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  },
+  "author": {
+    "name": "OpSprocket"
+  },
+  "strapi": {
+    "uuid": "opsprocket-cms"
+  },
+  "engines": {
+    "node": ">=18.0.0 <=22.x.x",
+    "npm": ">=6.0.0"
+  }
+}
