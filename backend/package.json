@@ -23,6 +23,7 @@
     "styled-components": "^6.1.19"
   },
   "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.28.0",
     "@swc/core-linux-x64-gnu": "^1.10.0",
     "@swc/core-linux-x64-musl": "^1.10.0"
   },
